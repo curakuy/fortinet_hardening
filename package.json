@@ -1,0 +1,14 @@
+{
+  "name": "yukaruc-fortios-hardening-analyzer",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "FortiOS 7.4 Hardening, Vulnerability, Hardware Acceleration & SSL-VPN Migration Analyzer for yukaruc.tech",
+  "scripts": {
+    "start": "node server-local.mjs",
+    "deploy": "npx wrangler deploy"
+  },
+  "dependencies": {
+    "ssh2": "^1.17.0"
+  }
+}
