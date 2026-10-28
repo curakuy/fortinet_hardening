@@ -11,8 +11,17 @@ import fs from "node:fs";
 import path from "node:path";
 import { spawn } from "node:child_process";
 import { fileURLToPath } from "node:url";
-import { Client as SshClient } from "ssh2";
 import workerDefault from "./_worker.js";
+
+// ssh2 sadece canlı SSH bağlantısı için gereklidir. Kurulu değilse (npm install yapılmadıysa)
+// uygulama yine açılır; .conf yükleme ve analiz çalışmaya devam eder.
+let SshClient = null;
+try {
+  ({ Client: SshClient } = await import("ssh2"));
+} catch (_) {
+  console.warn("[UYARI] 'ssh2' modulu bulunamadi. Canli SSH baglantisi icin bu klasorde 'npm install' calistirin.");
+  console.warn("        .conf dosyasi yukleyerek analiz yapmaya devam edebilirsiniz.");
+}
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ASSET_DIR = path.join(__dirname, "PUBLIC_ASSETS");
@@ -146,6 +155,11 @@ function fetchFortiGateSshConfig({ host, port = 22, username = "admin", password
     const targetPort = Number(port) || 22;
     const cleanUser = String(username || "admin").trim();
     const allowedCmd = command === "show full-configuration" ? "show full-configuration" : "show";
+
+    if (!SshClient) {
+      reject(new Error("SSH modulu (ssh2) kurulu degil. Uygulama klasorunde 'npm install' calistirip uygulamayi yeniden baslatin veya .conf dosyasini elle yukleyin."));
+      return;
+    }
 
     const conn = new SshClient();
     let stdout = "";

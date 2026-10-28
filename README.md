@@ -35,11 +35,22 @@
 
 Bilgisayarınızdaki antivirüs yazılımlarının `.exe` dosyalarını engellememesi için uygulama saf **Node.js ESM (`server-local.mjs`)** mimarisiyle çalışır:
 
-1. Klasör içindeki **`BASLAT.bat`** dosyasına çift tıklayın (veya terminalde çalıştırın):
-   ```powershell
-   node server-local.mjs
-   ```
-2. Tarayıcınızda otomatik olarak **`http://localhost:8788`** açılacaktır.
+### Gereksinim
+- **Node.js 18 veya üstü** (LTS önerilir): https://nodejs.org
+
+### Windows
+1. Depoyu indirin (`git clone` veya GitHub **Code → Download ZIP**). ZIP indirdiyseniz önce **tamamen klasöre çıkartın** (ZIP içinden çalıştırmayın).
+2. **`BASLAT.bat`** dosyasına çift tıklayın. İlk çalıştırmada SSH modülü (`ssh2`) otomatik kurulur (internet gerekir), ardından **`http://localhost:8788`** açılır.
+   > Windows SmartScreen uyarısı çıkarsa **Ek bilgi → Yine de çalıştır** deyin.
+
+### Windows / Linux / macOS (terminal)
+```bash
+npm install
+npm start
+```
+Ardından tarayıcıda `http://localhost:8788` adresini açın.
+
+> `npm install` yapılamasa bile uygulama açılır; sadece **canlı SSH bağlantısı** devre dışı kalır, `.conf` dosyası yükleyerek analiz yapılabilir.
 
 ---
 

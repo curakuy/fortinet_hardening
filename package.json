@@ -3,7 +3,10 @@
   "version": "1.0.0",
   "private": true,
   "type": "module",
-  "description": "FortiOS 7.4 Hardening, Vulnerability, Hardware Acceleration & SSL-VPN Migration Analyzer for yukaruc.tech",
+  "description": "FortiOS 7.4 & 7.6 Hardening, Vulnerability, Hardware Acceleration & Upgrade Analyzer for yukaruc.tech",
+  "engines": {
+    "node": ">=18"
+  },
   "scripts": {
     "start": "node server-local.mjs",
     "deploy": "npx wrangler deploy"
